@@ -32,8 +32,8 @@ This project requires Python 3 and the `gmpy2` library for efficient arbitrary-p
 
 1.  **Clone the repository**:
     ```bash
-    git clone <repository-url>
-    cd rsa-cryptography-project
+    git clone https://github.com/darc12345/Crypto-Assignment.git
+    cd Crypto-Assignment
     ```
 
 2.  **Create a virtual environment (recommended)**:
@@ -44,7 +44,7 @@ This project requires Python 3 and the `gmpy2` library for efficient arbitrary-p
 
 3.  **Install dependencies**:
     ```bash
-    pip install gmpy2
+    pip3 install gmpy2
     ```
     *Note: Installing `gmpy2` might require C compiler tools. Please refer to the [gmpy2 documentation](https://gmpy2.readthedocs.io/en/latest/install.html) for specific platform requirements.*
 
@@ -475,3 +475,7 @@ assert public_key_n == loaded_public_key_n
 assert public_key_e == loaded_public_key_e
 assert private_key_d == loaded_private_key_d
 print("Loaded keys match original keys.")
+```
+![Screenshot 2025-06-20 000249](https://github.com/user-attachments/assets/713cfdad-9989-4e94-9c5d-9e06e1253a87)
+
+
