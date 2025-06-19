@@ -62,10 +62,8 @@ import datetime
 import gmpy2
 import json
 
-# Assuming the HashDRBG and RSA classes are defined as in KKI.ipynb
 
 class HashDRBG():
-    # ... (paste HashDRBG class code from KKI.ipynb)
     def __init__(self, seedlen:int):
         self.seedlen = seedlen
         self.personalization_string = b'NeverGonnaGiveYouUp'
@@ -157,7 +155,6 @@ class HashDRBG():
                 return min_value + random_int
 
 class RSA():
-    # ... (paste RSA class code from KKI.ipynb)
     def __init__(self):
         self.p = None
         self.q = None
@@ -166,7 +163,7 @@ class RSA():
         self.d = None
         self.drbg = HashDRBG(seedlen=256)  
         self.security_strength = 128
-        self.nlen = 3072 #This is hardcoded in respect to SP800-57, Part 1 for security_strength 128
+        self.nlen = 3072 #this is hardcoded in respect to SP800-57, Part 1 for security_strength 128
         self.min_mr = 4
     def __long_to_bytes(self,n: int) -> bytes:
         length = (n.bit_length() + 7) // 8 or 1
@@ -329,7 +326,7 @@ class RSA():
             if p < (((2**(self.nlen//2-1)) * int(math.sqrt(2)*1e12)) //int(1e12)):
                continue
             if self.__gcd(p-1, e) == 1:
-                if gmpy2.mpz(p).is_probab_prime(self.min_mr*2): # Using gmpy2 for faster primality test
+                if gmpy2.mpz(p).is_probab_prime(self.min_mr*2): #using gmpy2 for faster primality test
                     if self.__lucas_test(p):
                         self.p = p
                         break
@@ -349,7 +346,7 @@ class RSA():
             if (abs(p-q)<((2**(self.nlen//2-100)))):\
                 continue
             if self.__gcd(q-1, e) == 1:
-                if gmpy2.mpz(q).is_probab_prime(self.min_mr*2): # Using gmpy2 for faster primality test
+                if gmpy2.mpz(q).is_probab_prime(self.min_mr*2): #using gmpy2 for faster primality test
                     if self.__lucas_test(q):
                         self.q = q
                         break
@@ -412,7 +409,7 @@ class RSA():
     
     def save_state(self, filename: str):
         state = {
-            'p': self.__long_to_bytes(self.p).hex(), # Convert bytes to hex string for JSON
+            'p': self.__long_to_bytes(self.p).hex(), #convert bytes to hex string for JSON
             'q': self.__long_to_bytes(self.q).hex(),
             'n': self.__long_to_bytes(self.n).hex(),
             'e': self.e,
@@ -422,9 +419,9 @@ class RSA():
             json.dump(state, f)
             
     def load_state(self, filename: str):
-        with open(filename, 'r') as f: # Open in text mode for JSON
+        with open(filename, 'r') as f: #open in text mode for JSON
             state = json.load(f)
-            self.p = int(state['p'], 16) # Convert hex string back to int
+            self.p = int(state['p'], 16) #convert hex string back to int
             self.q = int(state['q'], 16)
             self.n = int(state['n'], 16)
             self.e = state['e']
@@ -432,7 +429,7 @@ class RSA():
             if not (self.p and self.q and self.n and self.e and self.d):
                 raise ValueError("Invalid RSA state in the file")
 
-# Example Usage:
+# -- Example Usage --
 rsa = RSA()
 rsa.innitialize_rsa(e=65537, a=3, b=5)
 
